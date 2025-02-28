@@ -1,0 +1,285 @@
+* {
+    box-sizing: border-box;
+  }
+
+  canvas {
+    display: block;
+    width: 100vw;
+    height: 300px;
+  }
+
+  @keyframes colorChange {
+    0% {
+      background-color: #ff6347; /* Red */
+    }
+    50% {
+      background-color: #32cd32; /* Green */
+    }
+    100% {
+      background-color: #1e90ff; /* Blue */
+    }
+  }
+  /*
+  body {
+    animation: colorChange 5s infinite; /* 5 seconds, loop infinitely *//*
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif, 'Times New Roman', Times, serif;
+    background-color: #bfdbffee; 
+  }*/
+
+  body {
+    font-family: "Monomakh", system-ui, sans-serif;
+    background-color: #bfdbffee; /* Initial background color */
+    animation: colorChange 100s infinite; /* 100 seconds, loop infinitely */
+  }
+
+  /* Style the header */
+  .header {
+    grid-area: header;
+    background-color: #69696900;
+    /*padding: 0px;*/
+    text-align: center;
+    font-size: 28px;
+  }
+  
+  /* The content container */
+  #content {
+    display: grid;
+    grid-template-areas: 
+      'header header header header header header' 
+      'left left middle middle right right' 
+      'footer footer footer footer footer footer';
+     /*grid-column-gap: 10px; - if you want gap between the columns */
+    height: auto;
+    object-fit: cover;
+    overflow: hidden;
+  } 
+
+   /* The grid container */
+   .grid-container {
+    display: grid;
+    grid-template-areas: 
+      'header header header header header header' 
+      'left left middle middle right right' 
+      'footer footer footer footer footer footer';
+     /*grid-column-gap: 10px; - if you want gap between the columns */
+    height: auto;
+    object-fit: cover;
+    overflow: hidden;
+  } 
+    /* The grid container */
+    .content {
+    display: grid;
+    grid-template-areas: 
+      'header header header header header header' 
+      'left left middle middle right right' 
+      'footer footer footer footer footer footer';
+      /*grid-column-gap: 10px; - if you want gap between the columns */
+    height: auto;
+    object-fit: cover;
+    overflow: hidden;
+    } 
+
+  
+  .left,
+  .middle,
+  .right {
+    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-right: 10;
+    padding-bottom: 10px;
+    
+    /*height: 550px;  Should be removed. Only for demonstration */
+    
+  }
+  
+  /* Style the left column */
+  .left {
+    grid-area: left;
+    text-align: center;
+    overflow: hidden;
+    background-color:#aaa;
+  }
+  .left:hover{
+    background-color: rgb(255, 255, 255);
+  }
+  
+  
+  /* Style the middle column */
+  .middle {
+    grid-area: middle;
+    text-align: center;
+    overflow: hidden;
+    background-color:#bbb;
+    
+  }
+
+  .middle:hover{
+    background-color: aquamarine;
+  }
+  
+  /* Style the right column */
+  .right {
+    grid-area: right;
+    text-align: center;
+    overflow: hidden;
+    background-color:#858585;
+  }
+
+  .right:hover{
+    background-color: rgb(233, 64, 64);
+  }
+
+  /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+  @media (max-width: 1000px) {
+    .grid-container  {
+      grid-template-areas: 
+        'header header header header header header'
+        'left left left left left left' 
+        'middle middle middle middle middle middle' 
+        'right right right right right right' 
+        'footer footer footer footer footer footer';
+    }
+  }
+  .fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+  }
+
+    /* Style the footer */
+    .footer {
+      display: flex;
+      grid-area: footer;
+      background-color: #000000;
+      color:#ffffff;
+      
+      align-items:center;
+      justify-content:space-between;
+      padding: 10px;
+
+      width: 100%;
+    }
+    .footer img {
+      max-width: 50px;
+      height: auto;
+    }
+    .footer h3 {
+      margin: 0;
+      text-align: center; /* Centers the text in the middle */
+      flex-grow: 1; /* Allows the text to take up remaining space */
+  }
+
+  .overlay {
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.932);
+    background-color: rgba(6, 10, 236, 0.678);
+    overflow-y: hidden;
+    transition: 0.5s;
+  }
+  
+  .overlay-content {
+    position: relative;
+    top: 28%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 32px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+  }
+  
+  .overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .overlay {overflow-y: auto;}
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+    }
+  }
+ 
+  .tooltip {
+    position: top;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width:auto;
+    background-color:color-mix(in srgb, color percentage, color percentage);
+
+
+    color: #fff;
+    text-align:center;
+    vertical-align:center;
+    border-radius: 6px;
+    padding: 5px 0;
+    font-size: 16pt;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%); /* Centers horizontally */
+    max-width: calc(100% - 40px); /* 20px padding from left and right */
+    
+    
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .shake-on-hover:hover {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      10% { transform: translate(-1px, -2px) rotate(-1deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      30% { transform: translate(3px, 2px) rotate(0deg); }
+      40% { transform: translate(1px, -1px) rotate(1deg); }
+      50% { transform: translate(-1px, 2px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      70% { transform: translate(3px, 1px) rotate(-1deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      90% { transform: translate(1px, 2px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
+
+
+
