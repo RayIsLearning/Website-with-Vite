@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Monomakh&display=swap');</style>
+    <link rel="icon" type="image/x-icon" href="https://github.com/RayIsLearning/Website-with-Vite/assets/Badge1-BY4nc169.PNG">
+
+  <script type="module" crossorigin src="https://github.com/RayIsLearning/Website-with-Vite/assets/index-BfP-xv1T.js"></script>
+  <link rel="stylesheet" crossorigin href="https://github.com/RayIsLearning/Website-with-Vite/assets/index-BGAfao--.css">
+</head>
+<body>
+
+    <div class="grid-container">
+        <div class="header"><canvas id="c"></canvas></div>
+        <div id="myNav" class="overlay">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="overlay-content">
+            <div class="tooltip">
+                <span class="tooltiptext">My family, faith, and creative pursuits motivate me to continuously improve myself. My unwavering commitment to lifelong growth, integrity, and empathy is non-negotiable. My creative skills make the world a better place through music, sculpture, and computer software. My leadership skills harbor positive results while upholding the uttermost commitment to team development and mentorship. I enjoy web design and coding in JavaScript, C++, Python, and Java. I value remote collaboration whenever possible and have demonstrated a keen ability to develop lucrative business relationships remotely. While driven for great business results, my greatest treasure is time with my family. My long-term goals are to be remembered as a good father to my children and to help others acheive their full potential</span>
+                <a href="#">My Mission Statement</a>
+            </div>
+            <br>
+            <div class="tooltip">
+                <span class="tooltiptext">The last 3 books I read include: The king James version of the New Testement, Quantum Supremacy by Michio Kaku, and Hyperspace by Michio Kaku. See my thoughts on these books in my literary review page!</span>
+                <a href="#">Literature</a>
+            </div>
+            <br>
+            <div class="tooltip">
+                <span class="tooltiptext">Faith, Family, and the pursuit of wisdom, wellness, and personal development.</span>
+                <a href="#">My Inspiration</a>
+            </div>
+            <br>
+            <div class="tooltip">
+                <span class="tooltiptext">Here's a PDF copy of my Resume.</span>
+                <a href="./public/pdf/rezzy.pdf" target="_blank">My Resume</a>
+            </div>
+            <br>
+            <audio controls>
+                <source src="https://github.com/RayIsLearning/Website-with-Vite/assets/onrecord-B1Unz0oY.mp3" type="audio/mpeg">
+            </audio>
+            </div>
+        </div> 
+    </div>
+    <div id="content"></div>
+</body>
+
+    <!--JS that handles routing and single page loading -->
+    
+    <!--webGL stuff below -->
+<script id="vs" type="notjs">
+    uniform mat4 u_viewProjection;
+    uniform vec3 u_lightWorldPos;
+    uniform mat4 u_viewInverse;
+    
+    attribute vec4 instanceColor;
+    attribute mat4 instanceWorld;
+    attribute vec4 position;
+    attribute vec3 normal;
+    
+    varying vec4 v_position;
+    varying vec2 v_texCoord;
+    varying vec3 v_normal;
+    varying vec3 v_surfaceToLight;
+    varying vec3 v_surfaceToView;
+    varying vec4 v_color;
+    
+    void main() {
+      v_color = instanceColor;
+      vec4 worldPosition = instanceWorld * position;
+      v_position = u_viewProjection * worldPosition;
+      v_normal = (instanceWorld * vec4(normal, 0)).xyz;
+      v_surfaceToLight = u_lightWorldPos - worldPosition.xyz;
+      v_surfaceToView = u_viewInverse[3].xyz - worldPosition.xyz;
+      gl_Position = v_position;
+    }
+      </script>
+      <script id="fs" type="notjs">
+    precision mediump float;
+    
+    varying vec4 v_position;
+    varying vec3 v_normal;
+    varying vec3 v_surfaceToLight;
+    varying vec3 v_surfaceToView;
+    varying vec4 v_color;
+    
+    uniform vec4 u_lightColor;
+    uniform vec4 u_ambient;
+    uniform vec4 u_specular;
+    uniform float u_shininess;
+    uniform float u_specularFactor;
+    
+    vec4 lit(float l ,float h, float m) {
+      return vec4(1.0,
+                  max(l, 0.0),
+                  (l > 0.0) ? pow(max(0.0, h), m) : 0.0,
+                  1.0);
+    }
+    
+    void main() {
+      vec4 diffuseColor = v_color;
+      vec3 a_normal = normalize(v_normal);
+      vec3 surfaceToLight = normalize(v_surfaceToLight);
+      vec3 surfaceToView = normalize(v_surfaceToView);
+      vec3 halfVector = normalize(surfaceToLight + surfaceToView);
+      vec4 litR = lit(dot(a_normal, surfaceToLight),
+                        dot(a_normal, halfVector), u_shininess);
+      vec4 outColor = vec4((
+      u_lightColor * (diffuseColor * litR.y + diffuseColor * u_ambient +
+                    u_specular * litR.z * u_specularFactor)).rgb,
+          diffuseColor.a);
+      gl_FragColor = outColor;
+    }
+      </script>
+      <script>
+        function openNav() {
+          document.getElementById("myNav").style.height = "100%";
+        }
+        
+        function closeNav() {
+          document.getElementById("myNav").style.height = "0%";
+        }
+        </script>
+</html>
+
+
