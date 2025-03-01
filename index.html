@@ -2,10 +2,22 @@
 <html>
 <head>
     <title>Home</title>
-    <style>@import url('https://fonts.googleapis.com/css2?family=Monomakh&display=swap');</style>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Monomakh&display=swap');</style>
+
     <link rel="icon" type="image/x-icon" href="https://github.com/RayIsLearning/Website-with-Vite/assets/Badge1-BY4nc169.PNG">
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src 'self'">
+
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' 'unsafe-inline' https://rayislearning.github.io;
+        style-src 'self' 'unsafe-inline';
+        img-src 'self' https://rayislearning.github.io;
+        connect-src 'self';
+        font-src 'self';
+        object-src 'none';
+    ">
+    
   <script type="module" crossorigin src="https://github.com/RayIsLearning/Website-with-Vite/assets/index-BfP-xv1T.js"></script>
   <link rel="stylesheet" crossorigin href="https://github.com/RayIsLearning/Website-with-Vite/assets/index-BGAfao--.css">
 </head>
@@ -45,7 +57,8 @@
     <div id="content"></div>
 </body>
 
-    <!--JS that handles routing and single page loading -->
+    <!--JS that handles routing and single page loading -->
+
     
     <!--webGL stuff below -->
 <script id="vs" type="notjs">
@@ -111,7 +124,8 @@
           diffuseColor.a);
       gl_FragColor = outColor;
     }
-      </script>
+      </script>
+
       <script>
         function openNav() {
           document.getElementById("myNav").style.height = "100%";
